@@ -44,7 +44,13 @@ HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; T2306-Watcher/1.0)"}
 def load_state():
     if STATE.exists():
         return json.loads(STATE.read_text())
-    return {"seen": {}, "last_scan": None}
+    return {
+        "seen": {},
+        "last_scan": None,
+        "last_scan_started": None,
+        "websites_checked": [],
+        "website_status": {}
+    }
 
 def save_state(s):
     STATE.write_text(json.dumps(s, ensure_ascii=False, indent=2))
