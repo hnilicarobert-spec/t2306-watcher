@@ -1,0 +1,7 @@
+Main knobs are at the top of watcher.py:
+- QUERIES: search phrases
+- DOMAINS: marketplaces/sites
+- REFERENCE_IMAGE_URL: official T2306 reference
+- visual thresholds near the end of main()
+
+Default scan interval: every 15 minutes.

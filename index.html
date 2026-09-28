@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<title>T2306 Watcher</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;max-width:760px;margin:auto;padding:18px}
+.card{border:1px solid #ddd;border-radius:16px;padding:14px;margin:12px 0}
+img{max-width:100%;border-radius:12px;max-height:320px;object-fit:cover}
+a{word-break:break-word}.score{font-weight:700}
+</style>
+</head>
+<body>
+<h1>T2306 Watcher</h1>
+<p>Possible listings found by the latest automated scan.</p>
+<div id="app">Loading…</div>
+<script>
+fetch("results.json?"+Date.now()).then(r=>r.json()).then(rows=>{
+  document.getElementById("app").innerHTML = rows.length ? rows.map(x=>`
+    <article class="card">
+      <div class="score">${x.match || 0}% visual match</div>
+      <h2>${escapeHtml(x.title||"Untitled")}</h2>
+      ${x.image ? `<img src="${x.image}" loading="lazy">` : ""}
+      <p>${escapeHtml(x.reason||"")}</p>
+      <a href="${x.url}" target="_blank" rel="noopener">Open listing</a>
+    </article>`).join("") : "<p>No matches yet.</p>";
+}).catch(e=>document.getElementById("app").textContent="Could not load results.");
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));}
+</script>
+</body>
+</html>
