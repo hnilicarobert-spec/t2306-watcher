@@ -1,32 +1,465 @@
+```html
 <!doctype html>
 <html lang="en">
 <head>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta charset="utf-8">
 <title>T2306 Watcher</title>
+
 <style>
-body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;max-width:760px;margin:auto;padding:18px}
-.card{border:1px solid #ddd;border-radius:16px;padding:14px;margin:12px 0}
-img{max-width:100%;border-radius:12px;max-height:320px;object-fit:cover}
-a{word-break:break-word}.score{font-weight:700}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  max-width:760px;
+  margin:auto;
+  padding:18px;
+  background:#fff;
+  color:#111;
+}
+
+h1{
+  margin-bottom:4px;
+}
+
+.subtitle{
+  color:#666;
+  margin-top:0;
+}
+
+.card{
+  border:1px solid #ddd;
+  border-radius:16px;
+  padding:14px;
+  margin:12px 0;
+  background:#fff;
+  box-shadow:0 1px 3px rgba(0,0,0,.04);
+}
+
+img{
+  max-width:100%;
+  width:100%;
+  border-radius:12px;
+  max-height:320px;
+  object-fit:cover;
+}
+
+a{
+  word-break:break-word;
+}
+
+.score{
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.status-card{
+  border:1px solid #ddd;
+  border-radius:16px;
+  padding:16px;
+  margin:14px 0;
+  background:#f8f8f8;
+}
+
+.status-title{
+  font-size:14px;
+  color:#666;
+  margin-bottom:4px;
+}
+
+.status-time{
+  font-size:21px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.status-ok{
+  font-size:14px;
+  margin-bottom:14px;
+}
+
+#refreshButton{
+  width:100%;
+  border:0;
+  border-radius:12px;
+  padding:14px 16px;
+  font-size:17px;
+  font-weight:600;
+  cursor:pointer;
+  background:#111;
+  color:#fff;
+}
+
+#refreshButton:disabled{
+  opacity:.55;
+  cursor:default;
+}
+
+.websites{
+  margin-top:8px;
+}
+
+.website{
+  display:flex;
+  align-items:center;
+  padding:8px 0;
+  border-bottom:1px solid #e5e5e5;
+  font-size:15px;
+}
+
+.website:last-child{
+  border-bottom:0;
+}
+
+.check{
+  margin-right:8px;
+  font-weight:700;
+}
+
+.section-title{
+  margin-top:26px;
+  margin-bottom:8px;
+}
+
+.empty{
+  color:#666;
+}
+
+@media (prefers-color-scheme: dark){
+  body{
+    background:#111;
+    color:#eee;
+  }
+
+  .card{
+    border-color:#333;
+    background:#181818;
+  }
+
+  .status-card{
+    border-color:#333;
+    background:#181818;
+  }
+
+  .status-title,
+  .subtitle,
+  .empty{
+    color:#aaa;
+  }
+
+  .website{
+    border-color:#333;
+  }
+
+  #refreshButton{
+    background:#fff;
+    color:#111;
+  }
+}
 </style>
 </head>
+
 <body>
+
 <h1>T2306 Watcher</h1>
-<p>Possible listings found by the latest automated scan.</p>
-<div id="app">Loading…</div>
+
+<p class="subtitle">
+  Possible listings found by the latest automated scan.
+</p>
+
+<div id="status">
+  Loading watcher status…
+</div>
+
+<h2 class="section-title">Latest possible listings</h2>
+
+<div id="app">
+  Loading…
+</div>
+
 <script>
-fetch("results.json?"+Date.now()).then(r=>r.json()).then(rows=>{
-  document.getElementById("app").innerHTML = rows.length ? rows.map(x=>`
-    <article class="card">
-      <div class="score">${x.match || 0}% visual match</div>
-      <h2>${escapeHtml(x.title||"Untitled")}</h2>
-      ${x.image ? `<img src="${x.image}" loading="lazy">` : ""}
-      <p>${escapeHtml(x.reason||"")}</p>
-      <a href="${x.url}" target="_blank" rel="noopener">Open listing</a>
-    </article>`).join("") : "<p>No matches yet.</p>";
-}).catch(e=>document.getElementById("app").textContent="Could not load results.");
-function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));}
+
+async function loadDashboard(){
+
+  try{
+
+    const [stateResponse, resultsResponse] = await Promise.all([
+      fetch("state.json?" + Date.now()),
+      fetch("results.json?" + Date.now())
+    ]);
+
+    if(!stateResponse.ok){
+      throw new Error("Could not load state.json");
+    }
+
+    if(!resultsResponse.ok){
+      throw new Error("Could not load results.json");
+    }
+
+    const state = await stateResponse.json();
+    const rows = await resultsResponse.json();
+
+    /*
+     * Last successful scan
+     */
+    let lastScan = "Never";
+
+    if(state.last_scan){
+
+      const date = new Date(state.last_scan);
+
+      if(!isNaN(date.getTime())){
+        lastScan = date.toLocaleString([], {
+          year:"numeric",
+          month:"short",
+          day:"numeric",
+          hour:"2-digit",
+          minute:"2-digit"
+        });
+      }
+    }
+
+    /*
+     * Websites checked by watcher.py
+     */
+    const websites = state.websites_checked || [];
+
+    /*
+     * Friendly names for the domains
+     */
+    const websiteNames = {
+      "bazos.cz":"Bazoš Czech",
+      "bazos.sk":"Bazoš Slovakia",
+      "aukro.cz":"Aukro Czech",
+      "aukro.sk":"Aukro Slovakia",
+      "sbazar.cz":"Sbazar",
+      "facebook.com/marketplace":"Facebook Marketplace",
+      "modrykonik.cz":"Modrý koník",
+      "odklepnuto.cz":"Odklepnuto",
+      "ebay.de":"eBay Germany",
+      "ebay.com":"eBay"
+    };
+
+    /*
+     * Build status section
+     */
+    document.getElementById("status").innerHTML = `
+
+      <div class="status-card">
+
+        <div class="status-title">
+          Last refresh
+        </div>
+
+        <div class="status-time">
+          ${escapeHtml(lastScan)}
+        </div>
+
+        <div class="status-ok">
+          ✓ Scan completed
+        </div>
+
+        <button id="refreshButton" onclick="refreshNow()">
+          🔄 Refresh now
+        </button>
+
+      </div>
+
+      <div class="status-card">
+
+        <div class="status-title">
+          Websites checked
+        </div>
+
+        <div class="websites">
+
+          ${
+            websites.length
+
+            ? websites.map(site => `
+
+                <div class="website">
+
+                  <span class="check">✓</span>
+
+                  ${escapeHtml(
+                    websiteNames[site] || site
+                  )}
+
+                </div>
+
+              `).join("")
+
+            : `
+              <div class="empty">
+                No website information available yet.
+              </div>
+            `
+          }
+
+        </div>
+
+      </div>
+
+    `;
+
+    /*
+     * Display listings
+     */
+    document.getElementById("app").innerHTML =
+
+      rows.length
+
+      ? rows.map(x => `
+
+          <article class="card">
+
+            <div class="score">
+              ${Number(x.match || 0)}% visual match
+            </div>
+
+            <h2>
+              ${escapeHtml(x.title || "Untitled")}
+            </h2>
+
+            ${
+              x.image
+
+              ? `
+                <img
+                  src="${escapeHtml(x.image)}"
+                  loading="lazy"
+                  alt="Listing image"
+                >
+              `
+
+              : ""
+            }
+
+            <p>
+              ${escapeHtml(x.reason || "")}
+            </p>
+
+            <a
+              href="${escapeHtml(x.url)}"
+              target="_blank"
+              rel="noopener"
+            >
+              Open listing
+            </a>
+
+          </article>
+
+        `).join("")
+
+      : `
+        <p class="empty">
+          No matches yet.
+        </p>
+      `;
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    document.getElementById("status").innerHTML = `
+
+      <div class="status-card">
+
+        <div class="status-title">
+          Watcher status
+        </div>
+
+        <div>
+          Could not load watcher status.
+        </div>
+
+        <button
+          id="refreshButton"
+          onclick="loadDashboard()"
+          style="margin-top:14px"
+        >
+          ↻ Try again
+        </button>
+
+      </div>
+
+    `;
+
+    document.getElementById("app").innerHTML =
+      `<p class="empty">Could not load results.</p>`;
+  }
+
+}
+
+
+/*
+ * Manual refresh
+ *
+ * IMPORTANT:
+ * This button is currently only the UI.
+ * We will connect it to GitHub Actions in the next step.
+ */
+async function refreshNow(){
+
+  const button =
+    document.getElementById("refreshButton");
+
+  if(!button){
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "⏳ Refreshing…";
+
+  /*
+   * Temporary behavior:
+   * wait briefly and reload the dashboard.
+   *
+   * The next step will replace this with
+   * a real GitHub Actions trigger.
+   */
+  setTimeout(async () => {
+
+    button.disabled = false;
+    button.textContent = "🔄 Refresh now";
+
+    await loadDashboard();
+
+  }, 1500);
+
+}
+
+
+/*
+ * Protect the page against HTML contained
+ * in listing titles/reasons.
+ */
+function escapeHtml(value){
+
+  return String(value).replace(
+    /[&<>"']/g,
+    character => ({
+
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#039;"
+
+    }[character])
+  );
+
+}
+
+
+/*
+ * Initial load
+ */
+loadDashboard();
+
 </script>
+
 </body>
 </html>
+```
