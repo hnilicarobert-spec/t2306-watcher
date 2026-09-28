@@ -1,0 +1,38 @@
+name: T2306 chair watcher
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: t2306-watcher
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Scan marketplaces
+        env:
+          SERPER_API_KEY: ${{ secrets.SERPER_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
+          PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
+          OPENAI_MODEL: gpt-5.6-luna
+        run: python watcher.py
+      - name: Publish state
+        run: |
+          git config user.name "T2306 Watcher"
+          git config user.email "actions@users.noreply.github.com"
+          git add state.json results.json
+          git diff --cached --quiet || git commit -m "Update T2306 watcher state"
+          git push
