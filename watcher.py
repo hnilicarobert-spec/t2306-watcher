@@ -208,6 +208,18 @@ def notify(items):
 
 def main():
     state = load_state()
+
+    state["last_scan_started"] = time.strftime(
+        "%Y-%m-%dT%H:%M:%SZ",
+        time.gmtime()
+    )
+
+    state["websites_checked"] = DOMAINS.copy()
+    state["website_status"] = {
+        domain: "checked"
+        for domain in DOMAINS
+    }
+
     candidates = {}
     for q in QUERIES:
         try:
