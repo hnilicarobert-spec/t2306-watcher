@@ -6,7 +6,7 @@
       "match": 0,
       "first_seen": "2026-09-28T10:14:20Z",
       "active": true,
-      "last_checked": "2026-09-28T18:19:22Z"
+      "last_checked": "2026-09-28T18:46:36Z"
     },
     "393c4e24ec315dcdd9220333": {
       "url": "https://aukro.cz/nabizim-retro-kresla-kodreta-myjava-design-viliam-chlebo-7133626143",
@@ -22,7 +22,7 @@
       "match": 0,
       "first_seen": "2026-09-28T10:14:24Z",
       "active": true,
-      "last_checked": "2026-09-28T18:19:28Z"
+      "last_checked": "2026-09-28T18:46:40Z"
     },
     "68b7b2588871a14072526add": {
       "url": "https://aukro.cz/nabizim-retro-stolek-kodreta-myjava-design-viliam-chlebo-7133626597",
@@ -30,7 +30,7 @@
       "match": 0,
       "first_seen": "2026-09-28T10:14:27Z",
       "active": true,
-      "last_checked": "2026-09-28T18:19:32Z"
+      "last_checked": "2026-09-28T18:46:44Z"
     },
     "2a54099679673b1845ad24eb": {
       "url": "https://nabytok.bazos.sk/inzerat/195976327/kupim-stolicku-t2306-kodreta-myjava.php",
@@ -119,10 +119,34 @@
       "first_seen": "2026-09-28T16:20:50Z",
       "active": true,
       "last_checked": "2026-09-28T16:20:50Z"
+    },
+    "4dda1210156a1863f2626947": {
+      "url": "https://www.sbazar.cz/hledej/75/219-starozitny-nabytek",
+      "title": "75 v Starožitný nábytek Bazar a inzerce",
+      "match": 0,
+      "first_seen": "2026-09-28T18:46:48Z",
+      "active": true,
+      "last_checked": "2026-09-28T18:46:48Z"
+    },
+    "86001bfd4689afa3024d6e60": {
+      "url": "https://aukro.cz/thonet-chromovy-funkcionalisticky-gauc-7067321063",
+      "title": "Thonet chromový funkcionalistický gauč",
+      "match": 0,
+      "first_seen": "2026-09-28T18:46:52Z",
+      "active": true,
+      "last_checked": "2026-09-28T18:46:52Z"
+    },
+    "1c608ebe794f1f09721a7d9b": {
+      "url": "https://www.sbazar.cz/219-starozitny-nabytek/melnik?kde=m3859&radius=50",
+      "title": "Starožitný nábytek Mělník a okolí 50 km",
+      "match": 0,
+      "first_seen": "2026-09-28T18:46:57Z",
+      "active": true,
+      "last_checked": "2026-09-28T18:46:57Z"
     }
   },
-  "last_scan": "2026-09-28T18:19:32Z",
-  "last_scan_started": "2026-09-28T18:19:09Z",
+  "last_scan": "2026-09-28T18:46:57Z",
+  "last_scan_started": "2026-09-28T18:46:22Z",
   "websites_checked": [
     "bazos.cz",
     "bazos.sk",
