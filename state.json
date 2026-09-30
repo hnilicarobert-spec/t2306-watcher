@@ -6,7 +6,7 @@
       "match": 0,
       "first_seen": "2026-09-28T10:14:20Z",
       "active": true,
-      "last_checked": "2026-09-30T10:59:11Z"
+      "last_checked": "2026-09-30T11:19:16Z"
     },
     "393c4e24ec315dcdd9220333": {
       "url": "https://aukro.cz/nabizim-retro-kresla-kodreta-myjava-design-viliam-chlebo-7133626143",
@@ -38,7 +38,7 @@
       "match": 0,
       "first_seen": "2026-09-28T11:56:24Z",
       "active": true,
-      "last_checked": "2026-09-29T21:55:48Z"
+      "last_checked": "2026-09-30T11:19:11Z"
     },
     "0c754367e9fef3b26206255a": {
       "url": "https://nabytek.bazos.cz/inzeraty/%C4%8Daloun%C4%9Bn%C3%A1-%C5%BEidle/",
@@ -78,7 +78,7 @@
       "match": 0,
       "first_seen": "2026-09-28T15:57:22Z",
       "active": true,
-      "last_checked": "2026-09-30T10:19:25Z"
+      "last_checked": "2026-09-30T11:19:17Z"
     },
     "417dc1ed381d1fa1b698c82a": {
       "url": "https://www.sbazar.cz/hledej/k%C5%99eslo%20chrom",
@@ -146,11 +146,11 @@
     },
     "5bdd8cf1ab7909015231c051": {
       "url": "https://aukro.cz/koupim-zidli-t2306-kodreta-myjava-7135208694",
-      "title": "Koupím židli T2306 Kodreta Myjava",
+      "title": "Koupím židli T2306 Kodreta Myjava - Aukro",
       "match": 0,
       "first_seen": "2026-09-28T20:29:41Z",
       "active": true,
-      "last_checked": "2026-09-30T10:44:33Z"
+      "last_checked": "2026-09-30T11:19:15Z"
     },
     "b0b63616f60734ab35718838": {
       "url": "https://nabytek.bazos.cz/inzeraty/chromova-trubkova/",
@@ -186,11 +186,11 @@
     },
     "a843311ec3e40ee6a117c3ac": {
       "url": "https://www.sbazar.cz/inzerat/234399894-retro-kresla-kodreta-myjava-design-viliam-chlebo",
-      "title": "Retro křesla Kodreta Myjava, design Viliam CHlebo - Tábor",
+      "title": "Retro křesla Kodreta Myjava, design Viliam CHlebo",
       "match": 0,
       "first_seen": "2026-09-29T01:46:53Z",
       "active": true,
-      "last_checked": "2026-09-30T09:57:33Z"
+      "last_checked": "2026-09-30T11:19:22Z"
     },
     "bdd00f4abb1a35c25a58075e": {
       "url": "https://nabytek.bazos.cz/inzeraty/retro-stolicka/",
@@ -198,7 +198,7 @@
       "match": 0,
       "first_seen": "2026-09-29T03:19:57Z",
       "active": true,
-      "last_checked": "2026-09-30T03:56:27Z"
+      "last_checked": "2026-09-30T11:19:18Z"
     },
     "1a86463a7a61c6a163ae79e5": {
       "url": "https://aukro.cz/retro-skladaci-kreslo-kodreta-70-80-leta-orig-7065328679",
@@ -343,10 +343,18 @@
       "first_seen": "2026-09-30T10:19:27Z",
       "active": true,
       "last_checked": "2026-09-30T10:19:27Z"
+    },
+    "fa8df94b014b6aef8f49bbaa": {
+      "url": "https://nabytek.bazos.cz/inzeraty/zidle-ohybane/",
+      "title": "Zidle ohybane bazar - Nábytek | Bazoš.cz",
+      "match": 0,
+      "first_seen": "2026-09-30T11:19:23Z",
+      "active": true,
+      "last_checked": "2026-09-30T11:19:23Z"
     }
   },
-  "last_scan": "2026-09-30T10:59:11Z",
-  "last_scan_started": "2026-09-30T10:58:58Z",
+  "last_scan": "2026-09-30T11:19:23Z",
+  "last_scan_started": "2026-09-30T11:18:46Z",
   "websites_checked": [
     "bazos.cz",
     "bazos.sk",
