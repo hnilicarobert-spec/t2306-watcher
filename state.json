@@ -6,7 +6,7 @@
       "match": 0,
       "first_seen": "2026-09-28T10:14:20Z",
       "active": true,
-      "last_checked": "2026-10-01T09:36:40Z"
+      "last_checked": "2026-10-01T09:58:07Z"
     },
     "393c4e24ec315dcdd9220333": {
       "url": "https://aukro.cz/nabizim-retro-kresla-kodreta-myjava-design-viliam-chlebo-7133626143",
@@ -14,7 +14,7 @@
       "match": 0,
       "first_seen": "2026-09-28T10:14:22Z",
       "active": true,
-      "last_checked": "2026-10-01T05:13:33Z"
+      "last_checked": "2026-10-01T09:58:13Z"
     },
     "cdbaddfc45a12d4b34a919ff": {
       "url": "https://www.sbazar.cz/inzerat/233996346-nabizim-retro-stolek-kodreta-myjavadesign-viliam",
@@ -150,7 +150,7 @@
       "match": 0,
       "first_seen": "2026-09-28T20:29:41Z",
       "active": true,
-      "last_checked": "2026-10-01T09:36:38Z"
+      "last_checked": "2026-10-01T09:58:06Z"
     },
     "b0b63616f60734ab35718838": {
       "url": "https://nabytek.bazos.cz/inzeraty/chromova-trubkova/",
@@ -190,7 +190,7 @@
       "match": 0,
       "first_seen": "2026-09-29T01:46:53Z",
       "active": true,
-      "last_checked": "2026-10-01T09:36:44Z"
+      "last_checked": "2026-10-01T09:58:10Z"
     },
     "bdd00f4abb1a35c25a58075e": {
       "url": "https://nabytek.bazos.cz/inzeraty/retro-stolicka/",
@@ -377,8 +377,8 @@
       "last_checked": "2026-10-01T02:14:36Z"
     }
   },
-  "last_scan": "2026-10-01T09:36:49Z",
-  "last_scan_started": "2026-10-01T09:36:25Z",
+  "last_scan": "2026-10-01T09:58:13Z",
+  "last_scan_started": "2026-10-01T09:57:53Z",
   "websites_checked": [
     "bazos.cz",
     "bazos.sk",
